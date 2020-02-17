@@ -1,0 +1,9 @@
+.location {
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    font-family: monospace;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 1em;
+}
