@@ -1,0 +1,71 @@
+.WeatherCard {
+    background: linear-gradient(to bottom, #297af9, #333fb7);
+    box-shadow: .15rem .15rem .5rem rgba(0, 0, 0, 0.1);
+    margin: auto;
+    padding: 2rem;
+    width: 20rem;
+    text-align: center;
+    animation: horizontalFlipIn 1s;
+    border-radius: 2%;
+  }
+
+.temperature__icon {
+    margin: 0 0 0 2rem;
+    width: 8rem;
+}
+.current-condition {
+    text-align: center;
+  }
+  
+.temperature {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.temperature__status {
+      display: block;
+      font-size: 20px;
+      font-family: monospace;
+      text-align: center;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  
+.temperature__unit-dot {
+      border: 2px solid #fff;
+      border-radius: 10px;
+      height: 10px;
+      width: 10px;
+    }
+  
+.temperature__unit .temperature__unit-dot {
+      border-radius: 6px;
+      height: 6px;
+      margin-left: -15px;
+      margin-top: -39px;
+      width: 6px;
+    }
+  
+.temperature__unit-letter {
+      font-size: 35px;
+      margin-top: -38px;
+      font-family: monospace;
+    }
+  
+.temperature__value {
+      font-size: 70px;
+      margin-top: 20px;
+
+    }
+
+.temperature__unit {
+      display: flex;
+      flex-direction: row;
+      margin-left: 20px;
+    }
+
+#filled-basic {
+  font-family: monospace;
+  color: snow;  
+}
