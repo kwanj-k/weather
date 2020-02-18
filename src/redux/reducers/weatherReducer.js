@@ -1,5 +1,6 @@
 import {
-    GET_WEATHER
+    GET_WEATHER,
+    UPDATE_TITLE
 } from '../actions/types';
   
   const initialState = {};
@@ -10,6 +11,11 @@ import {
             return {
                 ...state,
                 weatherData: action.payload
+            };
+        case UPDATE_TITLE:
+            return {
+                ...state,
+                title: action.payload
             };
         default:
             return state;
