@@ -35,7 +35,7 @@ class WeatherCard extends Component {
             icon: 'cloudy',
             title: '',
             humidity: '',
-            location: 'Thika',
+            location: 'Nairobi',
             lat: 0,
             lng: 0
         }
@@ -49,7 +49,7 @@ class WeatherCard extends Component {
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            temp: Math.round(nextProps.weatherData.weatherData.currently['temperature']),
+            temp: Math.round((5/9) * (nextProps.weatherData.weatherData.currently['temperature'] - 32)),
             date: this.timeConverter(nextProps.weatherData.weatherData.currently['time']),
             icon: String(nextProps.weatherData.weatherData.currently['icon']),
             humidity: nextProps.weatherData.weatherData.currently['humidity'],
