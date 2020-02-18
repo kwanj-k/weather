@@ -57,6 +57,7 @@ class WeatherCard extends Component {
             lng: nextProps.weatherData.weatherData['longitude'],
             title: nextProps.weatherData.title,
         })
+        console.log(nextProps)
     }
     handleDateChange = event => {
         this.setState({
@@ -89,7 +90,6 @@ class WeatherCard extends Component {
         const { location, date } = this.state
         return (
             <div className="WeatherCard">
-                <form noValidate autoComplete="off">
                     <TextField
                     style={{width: 155}}
                     onChange={ this.formhandleChange}
@@ -103,7 +103,6 @@ class WeatherCard extends Component {
                         variant="contained" size="small" color="primary">
                         Get Weather
                     </Button>
-                    </form>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid container justify="space-around">
                         <DatePicker

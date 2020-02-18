@@ -1,5 +1,5 @@
 .WeatherCard {
-    background: linear-gradient(to bottom, #297af9, #333fb7);
+    background: linear-gradient(to bottom, #5493B2, #A2BAC9);
     box-shadow: .15rem .15rem .5rem rgba(0, 0, 0, 0.1);
     margin: auto;
     padding: 2rem;
@@ -72,4 +72,5 @@
 .search{
   float: right;
   margin-top: 17px !important;
+  background-color: #638BAE !important;
 }
