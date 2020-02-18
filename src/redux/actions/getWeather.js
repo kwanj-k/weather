@@ -15,7 +15,7 @@ async function getLocation(url) {
 }
 
 // Get Weather
-export const getWeather = (location) => dispatch => {
+export const getWeather = (location, rdate) => dispatch => {
     let Gkey = process.env.REACT_APP_GOOGLE_API_KEY
     let Gurl = `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${Gkey}`
     getLocation(Gurl).then(resdata => {
@@ -23,7 +23,7 @@ export const getWeather = (location) => dispatch => {
         let durl = process.env.REACT_APP_DARK_SKY_URL
         const latitude = resdata.results[0].geometry.location['lat'];
         const longitude = resdata.results[0].geometry.location['lng'];
-        let url = `${durl}/${key}/${latitude},${longitude}?exclude='flags','hourly', 'daily'`
+        let url = `${durl}/${key}/${latitude},${longitude},${rdate}?exclude='flags','hourly', 'daily'`
         axiosConfig
             .get(url)
             .then( res => {
