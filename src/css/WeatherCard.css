@@ -69,3 +69,7 @@
   font-family: monospace;
   color: snow;  
 }
+.search{
+  float: right;
+  margin-top: 17px !important;
+}
