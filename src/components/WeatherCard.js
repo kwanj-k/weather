@@ -48,16 +48,18 @@ class WeatherCard extends Component {
       }
 
     componentWillReceiveProps(nextProps){
-        this.setState({
-            temp: Math.round((5/9) * (nextProps.weatherData.weatherData.currently['temperature'] - 32)),
-            date: this.timeConverter(nextProps.weatherData.weatherData.currently['time']),
-            icon: String(nextProps.weatherData.weatherData.currently['icon']),
-            humidity: nextProps.weatherData.weatherData.currently['humidity'],
-            lat : nextProps.weatherData.weatherData['latitude'],
-            lng: nextProps.weatherData.weatherData['longitude'],
-            title: nextProps.weatherData.title,
-            wtitle: nextProps.weatherData.weatherData.currently['summary']
-        })
+        if (nextProps.weatherData.weatherData){
+            this.setState({
+                temp: Math.round((5/9) * (nextProps.weatherData.weatherData.currently['temperature'] - 32)),
+                date: this.timeConverter(nextProps.weatherData.weatherData.currently['time']),
+                icon: String(nextProps.weatherData.weatherData.currently['icon']),
+                humidity: nextProps.weatherData.weatherData.currently['humidity'],
+                lat : nextProps.weatherData.weatherData['latitude'],
+                lng: nextProps.weatherData.weatherData['longitude'],
+                title: nextProps.weatherData.title,
+                wtitle: nextProps.weatherData.weatherData.currently['summary']
+            })
+        }
     }
     handleDateChange = (date) => {
         this.setState({

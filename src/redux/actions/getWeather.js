@@ -21,15 +21,18 @@ export const getWeather = (location, rdate) => dispatch => {
     getLocation(Gurl).then(resdata => {
         let key = process.env.REACT_APP_DARK_SKY_KEY
         let durl = process.env.REACT_APP_DARK_SKY_URL
-        const latitude = resdata.results[0].geometry.location['lat'];
-        const longitude = resdata.results[0].geometry.location['lng'];
-        let url = `${durl}/${key}/${latitude},${longitude},${rdate}?exclude='flags','hourly', 'daily'`
-        axiosConfig
-            .get(url)
-            .then( res => {
-                dispatch(loadWeather(res.data));
-                dispatch(updateTitle(resdata.results[0].formatted_address))
-            })
+        if(resdata.results.length !== 0) {
+            const latitude = resdata.results[0].geometry.location['lat'];
+            const longitude = resdata.results[0].geometry.location['lng'];
+            let url = `${durl}/${key}/${latitude},${longitude},${rdate}?exclude='flags','hourly', 'daily'`
+            axiosConfig
+                .get(url)
+                .then( res => {
+                    dispatch(loadWeather(res.data));
+                    dispatch(updateTitle(resdata.results[0].formatted_address))
+                })
+
+        }
     })
 }
 
