@@ -31,9 +31,11 @@ class WeatherCard extends Component {
         super();
         this.state = {
             date: '',
+            rdate: Math.round(new Date().getTime() / 1000),
             temp: '',
             icon: 'cloudy',
             title: '',
+            wtitle: '',
             humidity: '',
             location: 'Nairobi',
             lat: 0,
@@ -41,10 +43,8 @@ class WeatherCard extends Component {
         }
         this.text = React.createRef();
       }
-    onChange = date => this.setState({ date })
-
     componentDidMount() {
-        this.props.getWeather(this.state.location)
+        this.props.getWeather(this.state.location, this.state.rdate)
       }
 
     componentWillReceiveProps(nextProps){
@@ -56,12 +56,13 @@ class WeatherCard extends Component {
             lat : nextProps.weatherData.weatherData['latitude'],
             lng: nextProps.weatherData.weatherData['longitude'],
             title: nextProps.weatherData.title,
+            wtitle: nextProps.weatherData.weatherData.currently['summary']
         })
-        console.log(nextProps)
     }
-    handleDateChange = event => {
+    handleDateChange = (date) => {
         this.setState({
-          date: event.target.value,
+            rdate: Math.round(date.getTime() / 1000),
+            date: this.timeConverter(Math.round(date.getTime() / 1000)),
         });
       };
     formhandleChange = (event) => {
@@ -72,7 +73,7 @@ class WeatherCard extends Component {
       }
     onSubmit = e => {
         e.preventDefault();
-        this.props.getWeather(this.state.location)
+        this.props.getWeather(this.state.location, this.state.rdate)
       };
     timeConverter(UNIX_timestamp){
         var a = new Date(UNIX_timestamp * 1000);
@@ -87,7 +88,7 @@ class WeatherCard extends Component {
         return time;
       }
     render() {
-        const { location, date } = this.state
+        let { location, date} = this.state
         return (
             <div className="WeatherCard">
                     <TextField
@@ -110,8 +111,8 @@ class WeatherCard extends Component {
                         id="date-picker-dialog"
                         label="Date"
                         format="MM/dd/yyyy"
+                        onChange={ this.handleDateChange}
                         value={date}
-                        onChange={this.handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
@@ -120,8 +121,8 @@ class WeatherCard extends Component {
                         margin="normal"
                         id="time-picker"
                         label="Time"
+                        onChange={ this.handleDateChange }
                         value={date}
-                        onChange={this.handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change time',
                         }}
@@ -146,7 +147,7 @@ class WeatherCard extends Component {
                                 </div>
                             </div>
                             <img className="temperature__icon" alt="icon" src={icons[iconkey(`${this.state.icon}`).id]} />
-                            <span ref={this.status} className="temperature__status">{this.state.title}</span>
+                            <span ref={this.status} className="temperature__status">{this.state.wtitle}</span>
                             <span ref={this.status} className="temperature__status">{this.state.humidity} Humidity</span>
 
                         </div>

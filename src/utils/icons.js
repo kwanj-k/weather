@@ -56,10 +56,10 @@ export default (iconKey) => {
     },
   };
 
-  const icon = data[iconKey];
+  let icon = data[iconKey];
 
   if (icon) {
     return icon;
   }
-  throw new Error(`No icon registered with the key: ${iconKey}`);
+  return data['cloudy'];
 }
