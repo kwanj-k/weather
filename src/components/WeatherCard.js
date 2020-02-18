@@ -19,7 +19,6 @@ import {
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { getLocation } from '../redux/actions/getLocation';
 import { getWeather } from '../redux/actions/getWeather';
 
 import '../css/CurrentDate.css';
@@ -36,16 +35,16 @@ class WeatherCard extends Component {
             icon: 'cloudy',
             title: '',
             humidity: '',
-            location: 'Nairobi, KE',
-            lat: -1.002193,
-            lng: 37.1640015
+            location: 'Thika',
+            lat: 0,
+            lng: 0
         }
         this.text = React.createRef();
       }
     onChange = date => this.setState({ date })
 
     componentDidMount() {
-        this.props.getWeather(this.state.lat, this.state.lng, this.state.date)
+        this.props.getWeather(this.state.location)
       }
 
     componentWillReceiveProps(nextProps){
@@ -53,9 +52,10 @@ class WeatherCard extends Component {
             temp: Math.round(nextProps.weatherData.weatherData.currently['temperature']),
             date: this.timeConverter(nextProps.weatherData.weatherData.currently['time']),
             icon: String(nextProps.weatherData.weatherData.currently['icon']),
-            title: nextProps.weatherData.weatherData.currently['summary'],
-            humidity: nextProps.weatherData.weatherData.currently['humidity']
-            //location: nextProps.weatherData.weatherData.currently['time']
+            humidity: nextProps.weatherData.weatherData.currently['humidity'],
+            lat : nextProps.weatherData.weatherData['latitude'],
+            lng: nextProps.weatherData.weatherData['longitude'],
+            title: nextProps.weatherData.title,
         })
     }
     handleDateChange = event => {
@@ -63,22 +63,15 @@ class WeatherCard extends Component {
           date: event.target.value,
         });
       };
-      formhandleChange = (event) => {
+    formhandleChange = (event) => {
         event.preventDefault();
         this.setState({ 
-              location: event.target.value,
+            location: event.target.value
         });
       }
-      onSubmit = e => {
+    onSubmit = e => {
         e.preventDefault();
-        const location = this.state.location
-        this.props.getLocation(location);
-        const cord = this.props.locationData.locationData.results[0].geometry.location
-        this.setState({
-          lat : cord.lat,
-          lng: cord.lng
-        })
-        this.props.getWeather(this.state.lat, this.state.lng, this.state.date)
+        this.props.getWeather(this.state.location)
       };
     timeConverter(UNIX_timestamp){
         var a = new Date(UNIX_timestamp * 1000);
@@ -101,6 +94,8 @@ class WeatherCard extends Component {
                     style={{width: 155}}
                     onChange={ this.formhandleChange}
                     label={location}
+                    value={location}
+                    name="location"
                     />
                     <Button 
                         className="search"
@@ -134,29 +129,29 @@ class WeatherCard extends Component {
                         />
                     </Grid>
                     </MuiPickersUtilsProvider>
-                <section className="location">
-                    <span ref={this.text}>Nairobi, KE</span>
-                </section>
-                <section className="date-current">
-                    <span  className="date-current__text">
-                        {this.state.date}
-                    </span>
-                </section>
-                <section className="current-condition">
-                    <div className="wrapper-temperature">
-                        <div className="temperature">
-                            <span ref={this.value} className="temperature__value">{this.state.temp}</span>
-                            <div ref={this.unit} className="temperature__unit">
-                                <span className="temperature__unit-dot"></span>
-                                <span className="temperature__unit-letter">c</span>
+                    <section className="location">
+                    <span ref={this.text}>{this.state.title}</span>
+                    </section>
+                    <section className="date-current">
+                        <span  className="date-current__text">
+                            {this.state.date}
+                        </span>
+                    </section>
+                    <section className="current-condition">
+                        <div className="wrapper-temperature">
+                            <div className="temperature">
+                                <span ref={this.value} className="temperature__value">{this.state.temp}</span>
+                                <div ref={this.unit} className="temperature__unit">
+                                    <span className="temperature__unit-dot"></span>
+                                    <span className="temperature__unit-letter">c</span>
+                                </div>
                             </div>
-                        </div>
-                        <img className="temperature__icon" alt="icon" src={icons[iconkey(`${this.state.icon}`).id]} />
-                        <span ref={this.status} className="temperature__status">{this.state.title}</span>
-                        <span ref={this.status} className="temperature__status">{this.state.humidity} Humidity</span>
+                            <img className="temperature__icon" alt="icon" src={icons[iconkey(`${this.state.icon}`).id]} />
+                            <span ref={this.status} className="temperature__status">{this.state.title}</span>
+                            <span ref={this.status} className="temperature__status">{this.state.humidity} Humidity</span>
 
-                    </div>
-                </section>
+                        </div>
+                    </section>
             </div>
         );
     }
@@ -165,7 +160,4 @@ class WeatherCard extends Component {
 const mapStateToProps = (state) => {
     return state
   }
-  export default connect(mapStateToProps, {
-    getLocation,
-    getWeather
-  })(WeatherCard);
+  export default connect(mapStateToProps, {getWeather})(WeatherCard);
