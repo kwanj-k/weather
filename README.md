@@ -36,4 +36,6 @@ Start the project
 
 ## Running tests 
 
+Click on the Circle CI badge to view tests.
+
 ``` npm test ```
