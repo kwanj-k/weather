@@ -1,7 +1,7 @@
 # weather
 A simple weather app
 
-[![Build Status](https://travis-ci.com/kwanj-k/weather.svg?branch=develop)](https://travis-ci.com/kwanj-k/weather)
+[![CircleCI](https://circleci.com/gh/kwanj-k/weather/tree/master.svg?style=svg)](https://circleci.com/gh/kwanj-k/weather/tree/master)
 
 ## Stacks used in the Project
 
