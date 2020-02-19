@@ -1,6 +1,8 @@
 # weather
 A simple weather app
 
+[![Build Status](https://travis-ci.com/kwanj-k/weather.svg?branch=develop)](https://travis-ci.com/kwanj-k/weather)
+
 ## Stacks used in the Project
 
 - React-redux
