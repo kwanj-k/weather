@@ -1,0 +1,16 @@
+language: node_js
+
+python:
+  - 'stable'
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - npm test -- --coverage
+  - coverage report
+  - coveralls
+
+after-success:
+  - coveralls

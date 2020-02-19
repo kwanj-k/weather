@@ -26,7 +26,7 @@ import "../css/Location.css";
 import "../css/WeatherCard.css";
 import "../css/weather-icons.min.css";
 
-class WeatherCard extends Component {
+export class WeatherCard extends Component {
     constructor() {
         super();
         this.state = {
@@ -159,7 +159,7 @@ class WeatherCard extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
     return state
   }
-  export default connect(mapStateToProps, {getWeather})(WeatherCard);
+export default connect(mapStateToProps, {getWeather})(WeatherCard);
