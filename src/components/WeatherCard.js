@@ -150,7 +150,7 @@ export class WeatherCard extends Component {
                             </div>
                             <img className="temperature__icon" alt="icon" src={icons[iconkey(`${this.state.icon}`).id]} />
                             <span ref={this.status} className="temperature__status">{this.state.wtitle}</span>
-                            <span ref={this.status} className="temperature__status">{this.state.humidity * 100}% Humidity</span>
+                            <span ref={this.status} className="temperature__status">{Math.round(this.state.humidity* 100)}% Humidity</span>
 
                         </div>
                     </section>
