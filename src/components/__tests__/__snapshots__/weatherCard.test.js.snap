@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`weather card view should render weather card 1`] = `ShallowWrapper {}`;

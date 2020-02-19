@@ -1,0 +1,20 @@
+language: node_js
+
+python:
+  - 'stable'
+
+cache:
+  directories:
+    - node_modules
+
+before-script:
+  - psql -c 'CREATE DATABASE test;' -U postgres
+  - python manage.py migrate
+
+script:
+  - npm test -- --coverage
+  - coverage report
+  - coveralls
+
+after-success:
+  - coveralls
