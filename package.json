@@ -29,11 +29,6 @@
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0"
   },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
   "engines": {
     "node": ">= 12",
     "npm": ">= 6"
