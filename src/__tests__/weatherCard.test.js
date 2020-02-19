@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16/build';
 import jest from 'jest-mock';
-import { mapStateToProps, WeatherCard } from '../WeatherCard';
+import { WeatherCard } from '../components/WeatherCard';
 
 Enzyme.configure({ adapter: new Adapter() });
 describe('weather card view', () => {
@@ -10,7 +10,6 @@ describe('weather card view', () => {
   let wrapper;
   let wrapperInstance;
   let state;
-  let dispatch;
   beforeEach(() => {
     props = {
         weatherData: {
