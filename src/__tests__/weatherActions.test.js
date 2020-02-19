@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import getWeather  from '../redux/actions/getWeather';
+import { getWeather }  from '../redux/actions/getWeather';
 import * as types from '../redux/actions/types';
 
 const middlewares = [thunk];
@@ -40,12 +40,10 @@ describe('Weather Actions test', () => {
             response: MockHttpResponse
       });
     });
-
-    // FIX The action test
     
-    // store.dispatch(getWeather('location', 9383838)).then(() => {
-    //     expect(store.getActions()).toEqual(expectedAction);
-    //   });
+    store.dispatch(getWeather('location', 9383838)).then(() => {
+        expect(store.getActions()).toEqual(expectedAction);
+      });
   
   });
 });
